@@ -1,29 +1,21 @@
-const assert = require('assert');
+Feature('Unlike Restaurant');
 
-Feature('Unliking Restoran');
+Scenario('Unlike a restaurant', ({ I }) => {
+  I.amOnPage('#/');
 
-Before(({ I }) => {
-  I.amOnPage('/#/like');
-});
-
-Scenario('showing empty liked resto', ({ I }) => {
-    I.dontSeeElement('#restaurants .restaurant-item');
-});
-
-Scenario('unliking one resto', async ({ I }) => {
- 
-  I.amOnPage('/');
-  I.seeElement('.restaurant-item__content a');
-  const firstRestaurant = locate('.restaurant-item__content a').first();
-  const firstRestaurantName = await I.grabTextFrom(firstRestaurant);
-  I.click(firstRestaurant);
-
+  I.seeElement('a.card-title');
+  I.waitForElement('a.card-title');
+  I.click(locate('a.card-title').first());
   I.seeElement('#likeButton');
   I.click('#likeButton');
 
-  I.amOnPage('/#/like');
-  I.seeElement('.restaurant-item');
-  const unlikedRestaurantName = await I.grabTextFrom('.restaurant-item__content a');
+  I.amOnPage('#/like');
+  I.wait(5);
 
-  assert.strictEqual(firstRestaurantName, unlikedRestaurantName);
+  I.seeElement('a.card-title');
+  I.click(locate('a.card-title').first());
+  I.seeElement('#likeButton');
+  I.click('#likeButton');
+
+  I.amOnPage('#/like');
 });

@@ -1,5 +1,3 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable no-undef */
 import FavoriteRestoIdb from '../src/scripts/data/favoriteresto-idb';
 import * as TestFactories from './helpers/testFactories';
 
@@ -20,19 +18,25 @@ describe('Unliking A Resto', () => {
   it('should display unlike widget when the resto has been liked', async () => {
     await TestFactories.createLikeButtonPresenterWithResto({ id: 1 });
 
-    expect(document.querySelector('[aria-label="unlike this resto"]')).toBeTruthy();
+    expect(
+      document.querySelector('[aria-label="unlike this resto"]')
+    ).toBeTruthy();
   });
 
   it('should not display like widget when the resto has been liked', async () => {
     await TestFactories.createLikeButtonPresenterWithResto({ id: 1 });
 
-    expect(document.querySelector('[aria-label="like this resto"]')).toBeFalsy();
+    expect(
+      document.querySelector('[aria-label="like this resto"]')
+    ).toBeFalsy();
   });
 
   it('should be able to remove liked resto from the list', async () => {
     await TestFactories.createLikeButtonPresenterWithResto({ id: 1 });
 
-    document.querySelector('[aria-label="unlike this resto"]').dispatchEvent(new Event('click'));
+    document
+      .querySelector('[aria-label="unlike this resto"]')
+      .dispatchEvent(new Event('click'));
 
     expect(await FavoriteRestoIdb.getAllRestaurants()).toEqual([]);
   });
@@ -44,7 +48,9 @@ describe('Unliking A Resto', () => {
     await FavoriteRestoIdb.deleteRestaurant(1);
 
     // kemudian, simulasikan pengguna menekan widget batal menyukai resto
-    document.querySelector('[aria-label="unlike this resto"]').dispatchEvent(new Event('click'));
+    document
+      .querySelector('[aria-label="unlike this resto"]')
+      .dispatchEvent(new Event('click'));
 
     expect(await FavoriteRestoIdb.getAllRestaurants()).toEqual([]);
   });
