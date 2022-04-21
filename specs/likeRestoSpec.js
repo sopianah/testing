@@ -1,5 +1,3 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable no-undef */
 import FavoriteRestoIdb from '../src/scripts/data/favoriteresto-idb';
 import * as TestFactories from './helpers/testFactories';
 
@@ -15,14 +13,17 @@ describe('Liking A Resto', () => {
   it('should show the like button when the resto has not been liked before', async () => {
     await TestFactories.createLikeButtonPresenterWithResto({ id: 1 });
 
-    expect(document.querySelector('[aria-label="like this resto"]'))
-      .toBeTruthy();
+    expect(
+      document.querySelector('[aria-label="like this resto"]')
+    ).toBeTruthy();
   });
 
   it('should not show the unlike button when the resto has not been liked before', async () => {
     await TestFactories.createLikeButtonPresenterWithResto({ id: 1 });
 
-    expect(document.querySelector('[aria-label="unlike this resto"]')).toBeFalsy();
+    expect(
+      document.querySelector('[aria-label="unlike this resto"]')
+    ).toBeFalsy();
   });
 
   it('should be able to like the resto', async () => {
